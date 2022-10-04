@@ -1,0 +1,11 @@
+<div>
+    <h1>Add An Existing Password</h1>
+</div>
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        Website: <input type="text" name="site" placeholder="Website Name">
+        Password: <input type="text" name="password" placeholder="Password">
+        <input type="submit">
+    </form>
+</div>

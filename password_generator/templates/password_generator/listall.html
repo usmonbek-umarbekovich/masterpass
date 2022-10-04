@@ -1,0 +1,12 @@
+<div>
+    <h1>Here Are All Passwords</h1>
+</div>
+
+<div>
+    {% for password in passwords %}
+        <a href="{% url 'detail' password.id %}"><hr>
+            <h2> Website: {{ password.site_name }} </h2>
+            <h5> Created on: {{ password.time }} </h5>
+        </a>
+    {% endfor %}
+</div>

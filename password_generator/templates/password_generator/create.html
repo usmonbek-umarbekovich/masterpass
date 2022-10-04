@@ -1,0 +1,11 @@
+<div>
+    <h1>Create New Password</h1>
+</div>
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        Website: <input type="text" name="site" placeholder="Website Name">
+        Length: <input type="text" name="length" placeholder="length of password">
+        <input type="submit">
+    </form>
+</div>

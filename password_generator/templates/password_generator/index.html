@@ -1,0 +1,15 @@
+<div>
+    <h1>welcome to MasterPass :)</h1>
+</div>
+<div>
+    <div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            Website <input type="text" name="site">
+            <input type="submit">
+        </form>
+    </div>
+    <a href="{% url 'create' %}"><h3>Generate New Password</h3></a>
+    <a href="{% url 'existing_password' %}"><h3>Enter an existing Password</h3></a>
+    <a href="{% url 'listall' %}"><h3>List All Passwords</h3></a>
+</div>

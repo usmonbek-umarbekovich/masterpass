@@ -1,0 +1,7 @@
+<div>
+    <a href="{% url 'edit' object.id %}"> Edit </a>
+    <a href="{% url 'delete' object.id %}">Delete</a>
+    <h2>Website Name: {{ object.site_name }}</h2>
+    <h2>Password: {{ object.password }}</h2>
+    <h5>Created time: {{ object.time }}</h5>
+</div>

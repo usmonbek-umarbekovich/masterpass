@@ -1,0 +1,9 @@
+<h1>Here Are the Results</h1>
+<div>
+    {% for result in results %}
+        <a href="{% url 'detail' result.id %}"><hr>
+            <h2> Website: {{ result.site_name }} </h2>
+            <h5> Created on: {{ result.time }} </h5>
+        </a>
+    {% endfor %}
+</div>
