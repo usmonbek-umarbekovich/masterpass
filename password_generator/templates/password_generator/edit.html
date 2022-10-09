@@ -1,3 +1,10 @@
 <div>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+
     <h2>not finished</h2>
 </div>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import PassGen
+from .forms import PassForm
 import string
 import random
 
@@ -48,7 +49,6 @@ def create(request):
 def listall(request):
     context = {
         'passwords': PassGen.objects.all(),
-
     }
     return render(request, 'password_generator/listall.html', context)
 
@@ -57,8 +57,19 @@ def detail(request, pk):
     return render(request, 'password_generator/detail.html', {'object': obj})
 
 def edit(request, pk):
-    # to do later
-    return render(request, 'password_generator/edit.html')
+    pswd = PassGen.objects.get(id=pk)
+    form = PassForm(instance=pswd)
+
+    if request.method == 'POST':
+        form = PassForm(request.POST, instance=pswd)
+        if form.is_valid():
+            form.save()
+            return redirect('detail', pk)
+        
+    context = {
+        'form': form,
+    }
+    return render(request, 'password_generator/edit.html', context)
 
 def delete_password(request, pk):
     obj = get_object_or_404(PassGen, id=pk)
