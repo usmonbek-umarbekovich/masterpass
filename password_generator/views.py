@@ -1,9 +1,10 @@
+import site
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import PassGen
 from .forms import PassForm
 import string
 import random
-
+from django.db.utils import IntegrityError
 
 # Create your views here.
 def index(request):
@@ -36,8 +37,14 @@ def create(request):
         else:
             password = ''.join(random.sample(all_chars, k=password_length))
 
-        p = PassGen.objects.create(site_name=site_name, password=password)
-        p.save()
+        try:
+            p = PassGen.objects.create(site_name=site_name, password=password)
+            p.save()
+
+        except IntegrityError:
+            p = PassGen.objects.get(site_name=site_name)
+            print('Integraty')
+            return render(request, 'password_generator/duplicate_site.html', {"pk": p.id})
 
         context = {
             'site_name': site_name,
