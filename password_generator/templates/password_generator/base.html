@@ -44,7 +44,14 @@
                             <a
                                 href="{% url 'create' %}"
                                 class="nav-link fs-5 text-reset"
-                                >Create</a
+                                >Create Password</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                href="{% url 'existing_password' %}"
+                                class="nav-link fs-5 text-reset"
+                                >Add Password</a
                             >
                         </li>
                         <li class="nav-item">
@@ -55,8 +62,10 @@
                             >
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link fs-5 text-reset">
-                                <i class="fas fa-sign-out-alt"></i> Logout
+                            <a
+                                href="#"
+                                class="nav-link fs-5 btn btn-danger text-white pb-2 pt-1 px-3">
+                                Logout
                             </a>
                         </li>
                         {% else %}
