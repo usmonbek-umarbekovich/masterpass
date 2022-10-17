@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-q*q0ne1vsu+yji((#qs%k!o$skod&(-shd!phxas%1$m04wz$8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sherzodotajonov.pythonanywhere.com', 'localhost',]
+ALLOWED_HOSTS = ['sherzodotajonov.pythonanywhere.com']
 
 
 # Application definition
@@ -122,3 +122,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# load local settings
+try:
+    from .local_settings import *
+except ImportError:
+    print('On Production')
