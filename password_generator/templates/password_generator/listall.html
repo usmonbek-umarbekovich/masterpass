@@ -4,7 +4,7 @@
 {% block app %}
 <div id="passwords" class="py-5 px-2">
     <div class="container">
-        <div class="d-flex flex-column align-items-center col-md-9 mx-auto">
+        <div class="d-flex flex-column align-items-center col-md-10 mx-auto">
             <h1 class="display-6 mb-5">Here Are All Passwords</h1>
 
             <ol
@@ -17,6 +17,16 @@
                     <p class="mb-0 me-3 fs-5">
                         {{ password.time | date:"j/n/Y, g:i A" }}
                     </p>
+                    <a
+                        href="{% url 'edit' password.id %}"
+                        class="btn btn-outline-warning me-2">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <a
+                        href="{% url 'delete' password.id %}"
+                        class="btn btn-outline-danger me-2">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
                     <a
                         href="{% url 'detail' password.id %}"
                         class="btn btn-outline-info"
