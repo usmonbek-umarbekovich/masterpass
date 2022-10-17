@@ -1,7 +1,18 @@
-<div>
-    You have successfully created a new password
-</div>
+{% extends 'password_generator/base.html' %}
 
-<div>
-    <h1>{{ site_name }}: {{ password }}</h1>
+<!-- Success page -->
+{% block app %}
+<div id="create_password" class="py-5 px-2">
+    <div class="container">
+        <div class="d-flex flex-column align-items-center col-md-9 mx-auto">
+            <h1 class="display-6 mb-5 text-success">
+                You have successfully created a new password
+            </h1>
+            <div class="d-flex display-6 mb-3">
+                <h2 class="me-3 fw-semibold">{{ site_name }}:</h2>
+                <p>{{ password }}</p>
+            </div>
+        </div>
+    </div>
 </div>
+{% endblock app %}
