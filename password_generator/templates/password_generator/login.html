@@ -1,8 +1,48 @@
-<h1>Hello</h1>
+{% extends 'password_generator/base.html' %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="login">
-    <p>dont have an account? <a href="{% url 'register' %}">Register</a></p>
-</form>
+<!-- Create password -->
+{% block app %}
+<div id="login" class="py-5 px-2">
+    <div class="container">
+        <div class="d-flex flex-column align-items-center col-md-6 mx-auto">
+            <h1 class="display-6 mb-5 text-center fw-semibold">Login</h1>
+            <form
+                method="POST"
+                class="d-flex flex-column align-items-center w-100">
+                {% csrf_token %}
+                <div class="mb-4 w-100">
+                    <input
+                        type="text"
+                        name="username"
+                        class="form-control fs-5"
+                        id="username"
+                        placeholder="Username" />
+                </div>
+
+                <div class="mb-1 w-100">
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control fs-5"
+                        id="password"
+                        placeholder="Password" />
+                </div>
+                {% if form.errors %}
+                <p class="text-danger me-auto">
+                    Your username and password didn't match. Please try again.
+                </p>
+                {% endif %}
+
+                <input
+                    type="submit"
+                    class="btn btn-primary btn-lg w-100 my-2 fw-semibold"
+                    value="Login" />
+                <p class="fs-5">
+                    Don't have an account?
+                    <a href="{% url 'register' %}">Register</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock app %}

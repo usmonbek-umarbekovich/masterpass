@@ -1,8 +1,8 @@
 {% extends 'password_generator/base.html' %}
 
-<!-- Create password -->
+<!-- Edit Password -->
 {% block app %}
-<div id="create_password" class="py-5 px-2">
+<div id="edit_password" class="py-5 px-2">
     <div class="container">
         <div class="d-flex flex-column align-items-center col-md-6 mx-auto">
             <h1 class="display-6 mb-5 text-center">Edit Password</h1>
@@ -19,6 +19,9 @@
                         value="{{ form.site_name.value }}"
                         placeholder="example.com" />
                     <label for="site">Website</label>
+                    {% for error in form.site_name.errors %}
+                    <p class="text-danger mb-1">{{ error }}</p>
+                    {% endfor %}
                 </div>
                 <div class="form-floating mb-4 w-100 fs-5">
                     <input
@@ -29,6 +32,9 @@
                         value="{{ form.password.value }}"
                         placeholder="password" />
                     <label for="password">Password</label>
+                    {% for error in form.password.errors %}
+                    <p class="text-danger mb-1">{{ error }}</p>
+                    {% endfor %}
                 </div>
                 <input
                     type="submit"
