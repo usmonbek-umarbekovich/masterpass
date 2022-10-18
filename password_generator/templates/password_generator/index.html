@@ -2,13 +2,17 @@
 
 <!-- App -->
 {% block app %}
-<div class="container-fluid container-md">
-    <div
-        class="d-flex flex-column align-items-center position-absolute top-50 start-50 translate-middle w-100">
-        <h1 class="mb-4 display-4">Welcome to MasterPass :)</h1>
-        <a href="{% url 'create' %}" class="btn btn-info btn-lg fw-semibold"
-            >Start Creating Passwords</a
-        >
+<div id="home" class="px-2 h-100" style="margin-top: -1rem">
+    <div class="container-fluid h-100">
+        <div
+            class="d-flex flex-column align-items-center justify-content-center w-100 h-100">
+            <h1 class="mb-5 mt-0 display-5 text-center">
+                Welcome to <span class="text-nowrap">MasterPass :)</span>
+            </h1>
+            <a href="{% url 'create' %}" class="btn btn-info btn-lg fw-semibold"
+                >Start Creating Passwords</a
+            >
+        </div>
     </div>
 </div>
 {% endblock app %}
