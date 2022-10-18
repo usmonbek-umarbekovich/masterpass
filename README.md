@@ -13,3 +13,4 @@
 #### - delete/edit password
 #### etc.
 
+## styled by @usmonbek-umarbekovich

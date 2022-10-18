@@ -1,12 +1,13 @@
 from django.urls import path
 from . import views
+from .views import PassCreate, PassDelete, PassDetail, PassEdit, PassExist, PasswordList
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('create/', views.create, name='create'),
-    path('listall/', views.listall, name='listall'),
-    path('detail/<int:pk>', views.detail, name='detail'),
-    path('edit/<int:pk>', views.edit, name='edit'),
-    path('delete/<int:pk>', views.delete_password, name='delete'),
-    path('existing', views.exist, name='existing_password')
+    path('create/', PassCreate.as_view(), name='create'),
+    path('listall/', PasswordList.as_view(), name='listall'),
+    path('detail/<int:pk>', PassDetail.as_view(), name='detail'),
+    path('edit/<int:pk>', PassEdit.as_view(), name='edit'),
+    path('delete/<int:pk>/', PassDelete.as_view(), name='delete'),
+    path('existing', PassExist.as_view(), name='existing_password')
 ]
