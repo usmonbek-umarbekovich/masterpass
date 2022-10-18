@@ -18,6 +18,9 @@
                         id="site"
                         placeholder="example.com" />
                     <label for="site">Website</label>
+                    {% for error in form.site_name.errors %}
+                    <p class="text-danger mb-1">{{ error }}</p>
+                    {% endfor %}
                 </div>
                 <div class="form-floating mb-4 w-100 fs-5">
                     <input
@@ -27,6 +30,9 @@
                         id="length"
                         placeholder="999" />
                     <label for="length">Length</label>
+                    {% for error in form.password.errors %}
+                    <p class="text-danger mb-1">{{ error }}</p>
+                    {% endfor %}
                 </div>
                 <input
                     type="submit"

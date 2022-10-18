@@ -42,6 +42,11 @@
                         </div>
                     </div>
                 </li>
+                {% empty %}
+                <li class="fs-4 mx-auto text-center">
+                    You haven't created any password yet.
+                    <a href="{% url 'create' %}">Create one</a>
+                </li>
                 {% endfor %}
             </ol>
         </div>
