@@ -6,7 +6,7 @@
     {% for password in passwords %}
         <a href="{% url 'detail' password.id %}"><hr>
             <h2> Website: {{ password.site_name }} </h2>
-            <h5> Created on: {{ password.time }} </h5>
+            <h5> Created on: {{ password.created }} </h5>
         </a>
     {% endfor %}
 </div>

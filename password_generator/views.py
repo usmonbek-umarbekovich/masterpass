@@ -1,10 +1,10 @@
-import site
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render
 from .models import PassGen
 from .forms import PassForm
-import string
-import random
-from django.db.utils import IntegrityError
+from django.urls import reverse_lazy
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
 
 # Create your views here.
 def index(request):
@@ -15,89 +15,42 @@ def index(request):
             return render(request, 'password_generator/search.html', {'results': results})
     return render(request, 'password_generator/index.html')
 
-def create(request):
-    if request.method == 'POST':
-        site_name = request.POST.get('site')
-        if site_name == "":
-            return render(request, 'password_generator/create.html')
-        password_length = int(request.POST.get('length'))
-        
-        chars = "!@#$%^&**()_+"
-        numbers = '0123456789'
-        lowercase = string.ascii_lowercase
-        uppercase = string.ascii_uppercase
-        all_chars = chars + numbers + lowercase + uppercase
 
-        if password_length > 30:
-            msg = 'Max Password Length is 30'
-            context = {
-                'msg': msg
-            }
-            return render(request, 'password_generator/create.html', context)
-        else:
-            password = ''.join(random.sample(all_chars, k=password_length))
+class PassCreate(CreateView):
+    form_class = PassForm
+    template_name = 'password_generator/create.html'
+    success_url = reverse_lazy('index')
 
-        try:
-            p = PassGen.objects.create(site_name=site_name, password=password)
-            p.save()
 
-        except IntegrityError:
-            p = PassGen.objects.get(site_name=site_name)
-            print('Integraty')
-            return render(request, 'password_generator/duplicate_site.html', {"pk": p.id})
+class PasswordList(ListView):
+    model = PassGen
+    template_name = 'password_generator/listall.html'
+    context_object_name = 'passwords'
 
-        context = {
-            'site_name': site_name,
-            'password': password,
-        }
-        return render(request, 'password_generator/success.html', context)
-    return render(request, 'password_generator/create.html')
 
-def listall(request):
-    context = {
-        'passwords': PassGen.objects.all(),
-    }
-    return render(request, 'password_generator/listall.html', context)
+class PassDetail(DetailView):
+    model = PassGen
+    context_object_name = 'object'
+    template_name = 'password_generator/detail.html'
 
-def detail(request, pk):
-    obj = get_object_or_404(PassGen, id=pk)
-    return render(request, 'password_generator/detail.html', {'object': obj})
 
-def edit(request, pk):
-    pswd = PassGen.objects.get(id=pk)
-    form = PassForm(instance=pswd)
+class PassEdit(UpdateView):
+    model = PassGen
+    fields = ['site_name', 'password']
+    template_name = 'password_generator/edit.html'
+    success_url = reverse_lazy('listall')
 
-    if request.method == 'POST':
-        form = PassForm(request.POST, instance=pswd)
-        if form.is_valid():
-            form.save()
-            return redirect('detail', pk)
-        
-    context = {
-        'form': form,
-    }
-    return render(request, 'password_generator/edit.html', context)
 
-def delete_password(request, pk):
-    obj = get_object_or_404(PassGen, id=pk)
-    obj.delete()
-    return redirect('listall')
+class PassDelete(DeleteView):
+    model = PassGen
+    context_object_name = 'password'
+    success_url = reverse_lazy('index')
+    template_name = 'password_generator/confirm_delete_password.html'
 
-def exist(request):
+
+class PassExist(CreateView):
     # enter an already existing password
-    if request.method == 'POST':
-        site_name = request.POST.get('site')
-        if site_name == "":
-            return render(request, 'password_generator/exist.html')
-        password = request.POST.get('password')
-        
-        p = PassGen.objects.create(site_name=site_name, password=password)
-        p.save()
-
-        context = {
-            'site_name': site_name,
-            'password': password,
-        }
-        return render(request, 'password_generator/success.html', context)
-
-    return render(request, 'password_generator/exist.html')
+    model = PassGen
+    fields = ['site_name', 'password']
+    template_name = 'password_generator/exist.html'
+    success_url = reverse_lazy('index')
