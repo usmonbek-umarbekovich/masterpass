@@ -1,15 +1,14 @@
-<div>
-    <h1>welcome to MasterPass :)</h1>
-</div>
-<div>
-    <div>
-        <form action="" method="POST">
-            {% csrf_token %}
-            Website <input type="text" name="site">
-            <input type="submit">
-        </form>
+{% extends 'password_generator/base.html' %}
+
+<!-- App -->
+{% block app %}
+<div class="container-fluid container-md">
+    <div
+        class="d-flex flex-column align-items-center position-absolute top-50 start-50 translate-middle w-100">
+        <h1 class="mb-4 display-4">Welcome to MasterPass :)</h1>
+        <a href="{% url 'create' %}" class="btn btn-info btn-lg fw-semibold"
+            >Start Creating Passwords</a
+        >
     </div>
-    <a href="{% url 'create' %}"><h3>Generate New Password</h3></a>
-    <a href="{% url 'existing_password' %}"><h3>Enter an existing Password</h3></a>
-    <a href="{% url 'listall' %}"><h3>List All Passwords</h3></a>
 </div>
+{% endblock app %}

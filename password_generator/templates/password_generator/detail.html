@@ -1,7 +1,29 @@
-<div>
-    <a href="{% url 'edit' object.id %}"> Edit </a>
-    <a href="{% url 'delete' object.id %}">Delete</a>
-    <h2>Website Name: {{ object.site_name }}</h2>
-    <h2>Password: {{ object.password }}</h2>
-    <h5>Created time: {{ object.created }}</h5>
+{% extends 'password_generator/base.html' %}
+
+<!-- List of passwords -->
+{% block app %}
+<div id="passwords" class="py-5 px-2">
+    <div class="container">
+        <div class="d-flex flex-column mx-auto">
+            <div class="d-flex display-6 mb-3 align-items-center">
+                <h1 class="me-3 fw-semibold">{{ object.site_name }}:</h1>
+                <p>{{ object.password }}</p>
+            </div>
+
+            <div class="d-flex mb-2">
+                <a
+                    href="{% url 'edit' object.id %}"
+                    class="btn btn-warning fs-4 me-3">
+                    Edit
+                </a>
+                <a
+                    href="{% url 'delete' object.id %}"
+                    class="btn btn-danger fs-4"
+                    >Delete</a
+                >
+            </div>
+            <p class="lead">{{ object.created | date:"j/n/Y, g:i A" }}</p>
+        </div>
+    </div>
 </div>
+{% endblock app %}
