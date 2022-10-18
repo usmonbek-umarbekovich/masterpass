@@ -1,11 +1,39 @@
-<div>
-    <h1>Create New Password</h1>
+{% extends 'password_generator/base.html' %}
+
+<!-- Create password -->
+{% block app %}
+<div id="create_password" class="py-5 px-2">
+    <div class="container">
+        <div class="d-flex flex-column align-items-center col-md-6 mx-auto">
+            <h1 class="display-6 mb-5">Create New Password</h1>
+            <form
+                method="POST"
+                class="d-flex flex-column align-items-center w-100">
+                {% csrf_token %}
+                <div class="form-floating mb-4 w-100 fs-5">
+                    <input
+                        type="text"
+                        name="site"
+                        class="form-control fs-5"
+                        id="site"
+                        placeholder="example.com" />
+                    <label for="site">Website</label>
+                </div>
+                <div class="form-floating mb-4 w-100 fs-5">
+                    <input
+                        type="number"
+                        name="length"
+                        class="form-control fs-5"
+                        id="length"
+                        placeholder="999" />
+                    <label for="length">Length</label>
+                </div>
+                <input
+                    type="submit"
+                    class="btn btn-primary btn-lg w-100"
+                    value="Create Password" />
+            </form>
+        </div>
+    </div>
 </div>
-<div>
-    <form action="" method="POST">
-        {% csrf_token %}
-        Website: <input type="text" name="site" placeholder="Website Name">
-        Length: <input type="text" name="length" placeholder="length of password">
-        <input type="submit">
-    </form>
-</div>
+{% endblock app %}

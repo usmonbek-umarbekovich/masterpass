@@ -1,9 +1,41 @@
-<h1>Here Are the Results</h1>
-<div>
-    {% for result in results %}
-        <a href="{% url 'detail' result.id %}"><hr>
-            <h2> Website: {{ result.site_name }} </h2>
-            <h5> Created on: {{ result.time }} </h5>
-        </a>
-    {% endfor %}
+{% extends 'password_generator/base.html' %}
+
+<!-- Search Results -->
+{% block app %}
+<div id="passwords" class="py-5 px-2">
+    <div class="container">
+        <div class="d-flex flex-column align-items-center col-md-10 mx-auto">
+            <h1 class="display-6 mb-5">Here Are the Results</h1>
+
+            <ol
+                class="list-group list-group-flush list-group-numbered w-100 fs-4">
+                {% for result in results %}
+                <li class="list-group-item d-flex align-items-center">
+                    <p class="ms-2 mb-0 text-info me-auto">
+                        {{ result.site_name }}
+                    </p>
+                    <p class="mb-0 me-3 fs-5">
+                        {{ result.time | date:"j/n/Y, g:i A" }}
+                    </p>
+                    <a
+                        href="{% url 'edit' result.id %}"
+                        class="btn btn-outline-warning me-2">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <a
+                        href="{% url 'delete' result.id %}"
+                        class="btn btn-outline-danger me-2">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                    <a
+                        href="{% url 'detail' result.id %}"
+                        class="btn btn-outline-info"
+                        >See Password
+                    </a>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
 </div>
+{% endblock app %}
