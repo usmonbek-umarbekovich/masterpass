@@ -1,0 +1,17 @@
+{% extends 'password_generator/base.html' %}
+
+<!-- Duplicate site -->
+{% block app %}
+<div id="create_password" class="py-5 px-2">
+    <div class="container">
+        <div class="d-flex flex-column align-items-center col-md-9 mx-auto">
+            <h1 class="display-6 mb-4 text-danger">
+                Password for this website already exists
+            </h1>
+            <a href="{% url 'edit' pk %}" class="fs-4 link-info">
+                Would you like to change the password?
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock app %}
