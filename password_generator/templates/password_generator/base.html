@@ -18,7 +18,7 @@
             src="https://kit.fontawesome.com/7a32cfd5ae.js"
             crossorigin="anonymous"></script>
     </head>
-    <body class="vh-100">
+    <body class="vh-100 d-flex flex-column">
         <!-- Navbar -->
         <nav
             class="navbar navbar-expand-lg bg-warning py-3 px-2 border-bottom border-1 border-dark">
@@ -87,7 +87,7 @@
             </div>
         </nav>
 
-        <div id="root">
+        <div id="root" class="border flex-grow-1">
             {% block app %}
             <!-- Extend here -->
             {% endblock app %}
